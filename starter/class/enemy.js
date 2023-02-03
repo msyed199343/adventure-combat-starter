@@ -4,6 +4,7 @@ const {Character} = require('./character');
 class Enemy extends Character {
   constructor(name, description, currentRoom) {
     super(name, description, currentRoom)
+    this.cooldown = 3000
   }
 
   setPlayer(player) {
@@ -13,8 +14,12 @@ class Enemy extends Character {
 
   randomMove() {
     // Fill this in
-  }
+      let exits = Object.values(this.currentRoom.exits)
+      let randomIndex = Math.floor(Math.random() * exits.length)
 
+      this.currentRoom = exits[randomIndex]
+      this.cooldown = 3000
+  }
   takeSandwich() {
     // Fill this in
   }
@@ -41,6 +46,7 @@ class Enemy extends Character {
 
   applyDamage(amount) {
     // Fill this in
+    this.health -= amount
   }
 
 
@@ -54,6 +60,7 @@ class Enemy extends Character {
       this.scratchNose();
       this.rest();
     }
+
 
     // Fill this in
   }
