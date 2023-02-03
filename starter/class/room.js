@@ -59,10 +59,10 @@ class Room {
 
   getEnemyByName(name) {
 
-    // Fill this in
+   } // Fill this in
 
 }
 
 module.exports = {
-  Room,
+  Room
 };
