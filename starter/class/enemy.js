@@ -5,11 +5,14 @@ class Enemy extends Character {
   constructor(name, description, currentRoom) {
     super(name, description, currentRoom)
     this.cooldown = 3000
+    this.attackTarget = null
   }
 
   setPlayer(player) {
     this.player = player;
   }
+
+
 
 
   randomMove() {
@@ -41,12 +44,20 @@ class Enemy extends Character {
   }
 
   attack() {
-    // Fill this in
+
+        this.player.applyDamage(this.strength)
+        this.cooldown += 3000;
+
+
   }
 
   applyDamage(amount) {
     // Fill this in
-    this.health -= amount
+    this.attackTarget = this.player
+    super.applyDamage(amount)
+
+
+
   }
 
 
@@ -72,6 +83,8 @@ class Enemy extends Character {
     this.alert(`${this.name} scratches its nose`);
 
   }
+
+
 
 
 }

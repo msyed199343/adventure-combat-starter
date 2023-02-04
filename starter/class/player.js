@@ -8,6 +8,8 @@ class Player extends Character {
     super(name, "main character", startingRoom);
   }
 
+
+
   move(direction) {
 
     const nextRoom = this.currentRoom.getRoomInDirection(direction);
@@ -36,23 +38,36 @@ class Player extends Character {
   takeItem(itemName) {
 
     // Fill this in
+    let item = this.currentRoom.getItemByName(itemName)
+    let index = this.currentRoom.items.indexOf(item)
+
+   this.items.push(item)
+
+    this.currentRoom.items.splice(index, 1)
+
 
   }
 
   dropItem(itemName) {
+    let item = this.getItemByName(itemName)
+    let index = this.items.indexOf(item)
 
-    // Fill this in
+   this.currentRoom.items.push(item)
+
+    this.items.splice(index, 1)
 
   }
 
   eatItem(itemName) {
+    let item = this.getItemByName(itemName)
+    let index = this.items.indexOf(item)
 
-    // Fill this in
+    item instanceof Food ? this.items.splice(index, 1) : console.log("You can't eat that!")
 
   }
 
   getItemByName(name) {
-
+    return this.items.find(i => i.name === name)
     // Fill this in
 
   }
@@ -60,7 +75,17 @@ class Player extends Character {
   hit(name) {
 
     // Fill this in
+    let enemy = this.findEnemyByName(name)
+      enemy.health -= this.strength
+      enemy.attackTarget = this
 
+
+  }
+
+  findEnemyByName(enemyName){
+    let enemies = this.currentRoom.getEnemies()
+
+     return enemies.find(i => i.name === enemyName)
   }
 
   die() {

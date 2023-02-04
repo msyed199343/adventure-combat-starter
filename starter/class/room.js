@@ -53,7 +53,7 @@ class Room {
 
   getItemByName(name) {
 
-    // Fill this in
+    return this.items.find(i => i.name === name)
 
   }
 
